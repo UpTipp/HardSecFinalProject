@@ -18,6 +18,12 @@ Install dependencies:
 sudo apt install verilog
 ```
 
+Also replace the API key, as it may be empty (I left $5 just in case):
+
+```python
+os.environ["OPENAI_API_KEY"] = "[INSERT_HERE]"
+```
+
 ## Running the Notebook
 
 1. Place `GHOST_Trojan_GPT.py` in the same directory as the notebook
