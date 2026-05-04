@@ -1,0 +1,21 @@
+Design: uart_controller.v
+Vulnerability ID: T3
+Model: gpt-4.1
+Attempts: 1
+
+Explanation:
+A hardware Trojan was inserted to monitor for a rare event pattern and, if detected, forcibly disables UART transmission for a limited time, causing denial of service. Original module operation is unaffected except during the Trojan's active period.
+
+Trigger:
+The Trojan is triggered by detecting eight occurrences of three consecutive asserted tx_start signals; this rare sequence is highly unlikely in normal operation and thus acts as a covert trigger.
+
+Payload:
+When triggered, the payload forces `tx_busy` to stay high and `tx` idle, effectively locking out all UART activity (denial of service) until an internal counter expires and restores normal function.
+
+Taxonomy:
+Insertion phase: Design  
+Abstraction level: Register-transfer level  
+Activation mechanism: Triggered internally  
+Effects: denial of service  
+Location: I/O (UART Controller)  
+Characteristics: Distributed, small, Functional

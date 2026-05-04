@@ -1,0 +1,21 @@
+Design: shift_reg.v
+Vulnerability ID: T1
+Model: gpt-4.1
+Attempts: 1
+
+Explanation:
+A Trojan counter and trigger logic were added; when data_out reaches 8'b10101010 at the 14th positive clock edge, the normal shift operation is overridden to force data_out to 8'b11111111 once. Otherwise, functionality remains unchanged.
+
+Trigger:
+The Trojan is triggered internally when the output matches 8'b10101010 and the internal counter reaches 13 (after 14 non-reset clock cycles).
+
+Payload:
+Upon activation, the output is corrupted to all 1's instead of the correct shift result for one cycle, producing incorrect data and potentially disrupting downstream logic.
+
+Taxonomy:
+Insertion phase: Design  
+Abstraction level: Register-transfer level  
+Activation mechanism: Triggered internally  
+Effects: change functionality  
+Location: Processor  
+Characteristics: Localized, small, Functional
