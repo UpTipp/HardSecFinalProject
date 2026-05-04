@@ -1,0 +1,9 @@
+vulnerability_id,vulnerability_type,design,avg_lines,avg_if_statements,avg_registers,avg_counters,sample_trigger,sample_payload,complexity_score
+HT1,Change Functionality,aes_sbox,55.5,4.5,3.5,1.0,"Counter reaches 10 clock cycles after reset is de-asserted","Change S-box output to 0xFF when triggered",70.0
+HT2,Leak Information,aes_sbox,79.5,6.0,6.0,1.5,"trojan_trigger input equals 4'b1101, arming covert state machine","Leaks LSB of S-box input via covert output pin (trojan_leak)",70.0
+HT3,Denial of Service,aes_sbox,72.0,7.0,5.0,1.5,"Sequential trigger: data_in receives 8'hAA then 8'h55 then 8'hFF on three consecutive cycles","S-box output forced to zero for two cycles causing denial-of-service",70.0
+HT4,Performance Degradation,aes_sbox,57.0,6.0,5.0,1.5,"Counter increments when data_in receives rare value 8'h7B","Accumulator/shift register runs once triggered causing degradation",70.0
+HT1,Change Functionality,uart_controller,55.5,4.5,3.5,1.0,"Counter reaches 10 clock cycles after reset is de-asserted","Alters UART transmission logic under trigger condition",95.2
+HT2,Leak Information,uart_controller,79.5,6.0,6.0,1.5,"trojan_trigger input equals 4'b1101, arming covert state machine","Leaks internal shift register contents via covert output pin",95.2
+HT3,Denial of Service,uart_controller,72.0,7.0,5.0,1.5,"Sequential trigger: specific byte sequence on tx_data input","Forces tx output to stuck state causing denial-of-service",95.2
+HT4,Performance Degradation,uart_controller,57.0,6.0,5.0,1.5,"Counter increments when rare tx_data value is detected","Introduces extra delay cycles in transmission logic",95.2
